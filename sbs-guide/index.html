@@ -208,7 +208,7 @@ aside.notes h3:first-child{margin-top:0}
     <h2>样本与口径</h2>
     <dl class="rule">
       <dt>题目</dt><dd>自拟 19 道，不在评测集内；按导购评测五个场景设计，购买偏好为日用、服装搭配、美妆。17 道文字题自动跑；2 道图片题由用户 2026-11-06 在登录态手动发图测试（ChatGPT 登录态，Migoo 同账号），按截图复判。</dd>
-      <dt>Migoo</dt><dd>登录态默认 agent，Internal Tools 的 Mock Target Region 设为 US，每题独立新建 task。</dd>
+      <dt>Migoo</dt><dd>登录态默认 agent，Internal Tools 的 Mock Target Region 设为 US，每题独立新建 task。主模型 openai/dsv4-flash-mshop-agent-1028872（DeepSeek V4 Flash 的 mshop 专用部署，经 OpenAI 兼容网关，带 Thinking），来自 Langfuse trace 的 call_llm 节点。</dd>
       <dt>ChatGPT</dt><dd>未登录游客模式，默认路由 auto、回复模型 gpt-6，页面标 basic model；每题开头加 "I am shopping in the US (US stores, USD prices)."</dd>
       <dt>TTFT</dt><dd>首 token 耗时为 2026-11-06 用同样方式复测一次得到，与页面上展示的回复不是同一次运行；计时从按下发送到答案正文出现第一个字。</dd>
       <dt>截图</dt><dd>两边回复均为当时页面的真实内容；ChatGPT 的商品图从截图裁切作示意，裁不到的位置显示它的搜索词。</dd>
@@ -296,7 +296,7 @@ function renderVerdict(n){
   <h3>首 token 耗时（复测）</h3><div class="ttft-row"><span class="ttft">Migoo <b>${fmtT(t.m_first)}</b></span><span class="ttft">ChatGPT <b>${fmtT(t.g_first)}</b></span></div>
   <h3>赢在哪、输在哪 <span class="tag blue">点一条，红框圈出</span></h3>
   <ul class="pts">${j.pts.map((p,i)=>`<li class="pt ${p[1]==='win'?'winside':''}" data-i="${i}" tabindex="0"><div class="who"><span class="tag ${p[1]}">${WHO[p[0]]} ${RLABEL[p[1]]}</span><span class="tag ${p[2]}">${KLABEL[p[2]]}</span></div><div class="txt">${esc(p[3])}</div>${p[4]&&p[4].length?`<div class="go">${p[4].length} 处标注</div>`:""}</li>`).join("")}</ul>
-  <div class="legend">必要项判任务有没有完成，任一未满分封顶 0.75，主需落空封顶 0.49。增益项判完成得好不好，只在必要项打平时决定胜负。TTFT 为复测值，与展示的回复不是同一次运行。</div>`;
+  <div class="legend">必要项判任务有没有完成，任一未满分封顶 0.75，主需落空封顶 0.49。增益项判完成得好不好，只在必要项打平时决定胜负。TTFT 为复测值，与展示的回复不是同一次运行。Migoo 主模型 DeepSeek V4 Flash（dsv4-flash-mshop-agent-1028872），ChatGPT 游客模式为 gpt-6。</div>`;
   v.querySelectorAll(".pt").forEach(li=>{const h=()=>{focusPoint(+li.dataset.i)};li.addEventListener("click",h);li.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();h();}});});
 }
 function pane(side,label,sub,n){
