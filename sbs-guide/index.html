@@ -98,6 +98,27 @@ table.sc td:nth-child(2){text-align:center;font-variant-numeric:tabular-nums}
 .mods p.pr em{color:var(--red-ink);background:#fff}
 .mods p.cs{border-left-color:var(--line)} .mods p.cs em{color:var(--ink2);background:#f2f3f5}
 .mods p.op em{color:var(--blue);background:var(--blue-bg)}
+
+/* diff + opt table */
+.h3{font-size:12.5px;font-weight:600;color:var(--ink3);letter-spacing:.04em;margin:0 0 8px}
+.diff{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.diff{grid-template-columns:1fr}}
+.dcol{background:#f7f8fa;border-radius:10px;padding:10px 12px;min-width:0}
+.dh{font-size:13px;font-weight:700;margin-bottom:6px}
+.dh.g{color:var(--ink)} .dh.m{color:var(--blue)}
+.dcol ul{padding-left:16px;font-size:12.5px}
+.dcol li{margin:4px 0;line-height:1.55}
+.dnote{margin:10px 0 0!important;font-size:12.5px;color:var(--ink2)}
+.dnote b{color:var(--ink)}
+.tblwrap{overflow-x:auto}
+table.opt{width:100%;border-collapse:collapse;font-size:12.5px;color:var(--ink2);min-width:720px}
+table.opt th{font-size:12px;font-weight:600;color:var(--ink3);text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.opt th.pr{color:var(--red-ink)} table.opt th.op{color:var(--blue)}
+table.opt td{padding:9px 10px;border-bottom:1px solid #eef1f5;vertical-align:top;line-height:1.55}
+table.opt td:first-child{white-space:nowrap;color:var(--ink);width:1%}
+table.opt td.pr{background:var(--red-bg);color:var(--ink);width:26%}
+table.opt td.op{border-left:3px solid var(--blue);width:26%}
+table.opt .k{display:block;margin-top:4px;font-size:10.5px;font-weight:600;color:var(--red-ink);background:var(--red-bg);border-radius:4px;padding:0 6px;line-height:18px;width:max-content}
 /* workbench */
 .app{display:grid;grid-template-columns:250px minmax(0,1fr) 320px;gap:16px;align-items:start}
 @media (max-width:1100px){.app{grid-template-columns:230px minmax(0,1fr)} aside.notes{grid-column:1/-1;position:static;max-height:none}}
@@ -236,77 +257,74 @@ aside.notes h3:first-child{margin-top:0}
       </div>
       <div class="ttft-sum" id="ttftsum"></div>
     </div>
-    <div class="cats">
-      <div class="cat">
-        <h3>按场景</h3>
-        <table class="sc">
-          <thead><tr><th>场景</th><th>题</th><th class="m">Migoo</th><th class="g">ChatGPT</th><th class="t">平</th><th>结论</th></tr></thead>
-          <tbody>
-            <tr><td>大件复杂决策</td><td>5</td><td class="m">1</td><td class="g">4</td><td class="t">0</td><td>两边都能交付，ChatGPT 靠判断和解释赢增益；Migoo 只在多约束题（<a class="qc" href="#q2">Q2</a>）硬约束对得更全</td></tr>
-            <tr><td>基础找商品</td><td>4</td><td class="m">0</td><td class="g">3</td><td class="t">1</td><td>Migoo 首推白牌低价款；指定型号没货换型号交差（<a class="qc" href="#q9">Q9</a>）</td></tr>
-            <tr><td>送礼</td><td>3</td><td class="m">0</td><td class="g">2</td><td class="t">1</td><td>ChatGPT 给人设对应的品牌和礼物组合；送达题两边都没给判断</td></tr>
-            <tr><td>搭配清单</td><td>5</td><td class="m">2</td><td class="g">3</td><td class="t">0</td><td>Migoo 赢在给具体商品和尺码（<a class="qc" href="#q15">Q15</a><a class="qc" href="#q17">Q17</a>）；输在整套不互搭（<a class="qc" href="#q13">Q13</a>）</td></tr>
-            <tr><td>截图找同款</td><td>2</td><td class="m">0</td><td class="g">1</td><td class="t">1</td><td>两边都认出叠穿、都没找到同款；Migoo 链接打不开输必要项</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cat">
-        <h3>必要项 <span class="tag must">任务有没有完成</span></h3>
+    <h3 class="h3">两边的差异</h3>
+    <div class="diff">
+      <div class="dcol">
+        <div class="dh g">ChatGPT</div>
         <ul>
-          <li><b>Migoo 赢的 3 题全靠必要项</b>：多约束逐条对应（<a class="qc" href="#q2">Q2</a>）、裙子标明 S 码（<a class="qc" href="#q15">Q15</a>）、清单给具体商品和价格（<a class="qc" href="#q17">Q17</a>）。ChatGPT 这三题分别超预算、未确认库存、只给品类。</li>
-          <li><b>Migoo 被封顶的题</b>：指定型号没货给另一型号（<a class="qc" href="#q9">Q9</a>）、胶囊衣橱颜色尺码不互搭（<a class="qc" href="#q13">Q13</a>）、英镑英国站（<a class="qc" href="#q16">Q16</a>）、链接 404（<a class="qc" href="#q18">Q18</a>）。</li>
-          <li><b>两边同时封顶</b>：视黄醇眼霜只给 CeraVe（<a class="qc" href="#q8">Q8</a>）、周五前能否送达没判断（<a class="qc" href="#q11">Q11</a>）、Prada 平替没给具体商品（<a class="qc" href="#q12">Q12</a>）、没查到尺码表（<a class="qc" href="#q19">Q19</a>）。这些题转到增益项比。</li>
+          <li><b>先理解意图再决定怎么回</b>：婚礼穿搭先给上身效果图再给单品<a class="qc" href="#q13">Q13</a>；美妆冰箱和蒸脸仪直接说都不是必需、钱该花在别处<a class="qc" href="#q5">Q5</a>；Airwrap 说"别买，买 Shark FlexStyle"<a class="qc" href="#q3">Q3</a>。</li>
+          <li><b>候选是用户认得的品牌</b>：Laifen、Shark、The Ordinary、COSRX，并说清为什么选它。</li>
+          <li><b>回答结构随题变</b>：预算表、5 天穿搭组合、四家比价表、"我的结论"段。</li>
+          <li><b>短板</b>：硬约束对得不如 Migoo 认真，超预算、未确认库存、只给品类不给商品<a class="qc" href="#q2">Q2</a><a class="qc" href="#q15">Q15</a><a class="qc" href="#q17">Q17</a>。</li>
         </ul>
       </div>
-      <div class="cat">
-        <h3>增益项 <span class="tag gain">完成得好不好</span></h3>
+      <div class="dcol">
+        <div class="dh m">Migoo</div>
         <ul>
-          <li><b>ChatGPT 赢的 13 题里 9 题赢在增益</b>，来源三个：候选优质性（Laifen、Shark、The Ordinary、COSRX 这类用户认得的品牌）；解释质量（无刷电机对营销词、415nm 蓝光、早晚护肤流程）；特异性增益（剩余预算怎么花、四家比价、三个礼物组合）。</li>
-          <li><b>Migoo 增益项只赢 2 处</b>：点名仿品站并提出 Coach、Kate Spade 方向（<a class="qc" href="#q12">Q12</a>）；逐件说明领型袖型差异并给组合价（<a class="qc" href="#q18">Q18</a>）。</li>
-          <li><b>Migoo 增益项的固定短板</b>：首推 1.09 美元精华、7 美元吹风机（<a class="qc" href="#q6">Q6</a><a class="qc" href="#q1">Q1</a>）；只列参数不讲取舍；送达只说"结账时看"。</li>
-        </ul>
-      </div>
-      <div class="cat">
-        <h3>两边的打法</h3>
-        <ul>
-          <li><b>ChatGPT 是 agentic 的</b>：先理解 query 背后的真实意图，再决定回什么、怎么回。婚礼穿搭先给上身效果图再给单品（<a class="qc" href="#q13">Q13</a>）；美妆冰箱和蒸脸仪直接说都不是必需、钱该花在别处（<a class="qc" href="#q5">Q5</a>）；Airwrap 说"别买，买 Shark FlexStyle"（<a class="qc" href="#q3">Q3</a>）。回答结构随题变：预算表、5 天穿搭组合、四家比价表、"我的结论"段。</li>
-          <li><b>Migoo 是按字面执行的</b>：搜到什么给什么，不替用户做判断，17 题一个结构："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"。</li>
-          <li><b>Migoo 的优势要保留</b>：每题都有可直接购买的商品卡；显性约束（预算、尺码、同店）对得认真；清单题直接落到具体套装和价格。</li>
-          <li><b>时延</b>：首 token 中位 Migoo 28.0 秒对 ChatGPT 8.7 秒，17 道文字题全部更慢；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"。</li>
+          <li><b>按 query 字面执行</b>：搜到什么给什么；判断要么没给，要么给了但不准，指定型号没货就换一个型号交差<a class="qc" href="#q9">Q9</a>。</li>
+          <li><b>候选落在白牌低价款</b>：首推 1.09 美元精华、7 美元吹风机，知名品牌只在站外补充<a class="qc" href="#q6">Q6</a><a class="qc" href="#q1">Q1</a>。</li>
+          <li><b>17 题一个结构</b>："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"，只列参数不讲取舍。</li>
+          <li><b>优势要保留</b>：每题都有可直接购买的商品卡；预算、尺码、同店这类显性约束对得认真；清单题直接落到具体套装和价格<a class="qc" href="#q2">Q2</a><a class="qc" href="#q15">Q15</a><a class="qc" href="#q17">Q17</a>。</li>
         </ul>
       </div>
     </div>
+    <p class="dnote"><b>时延</b>：首 token 中位 Migoo 28.0 秒对 ChatGPT 8.7 秒，17 道文字题全部更慢；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"。</p>
   </div>
   <div class="sum opt">
-    <h2>优化点（按模块） <span class="tag lose">当前问题</span><span class="tag form">Case</span><span class="tag blue">理想态</span></h2>
-    <p class="optlead">只描述问题和理想态，不给技术解法；怎么做由技术评审定。</p>
-    <ol class="mods">
-      <li><b>意图理解与回答模式选择</b><span class="k">最关键，目前没有</span>
-        <p class="pr"><em>当前问题</em>把所有题都当"找商品"处理：该做判断的不判断，该给效果图的给卡片，指定型号没货就换型号交差。</p>
-        <p class="cs"><em>Case</em>问"美妆冰箱和蒸脸仪先买哪个"，ChatGPT 说两样都不是必需、钱该花在别处，Migoo 只排了先后<a class="qc" href="#q5">Q5</a>；问 Airwrap 值不值，ChatGPT 说"别买，买 Shark FlexStyle"，Migoo 给 6 款白牌造型器<a class="qc" href="#q3">Q3</a>；指定 Stanley 某型号某颜色，Migoo 找不到就给了另一型号<a class="qc" href="#q9">Q9</a>。</p>
-        <p class="op"><em>理想态</em>回答前先想清楚用户到底要什么：是要一个判断、一个对比、一套搭配、还是一个具体商品；该给结论就先给结论，该说"不建议买"就说，该追问就先追问，然后才去找商品。</p></li>
-      <li><b>基模能力</b>
-        <p class="pr"><em>当前问题</em>缺世界知识和判断力：不知道 Airwrap 的公认平替、不知道痘肌看 415nm 蓝光、不知道美妆冰箱多数人用不上。这和检索无关，检索到了也判断不出来。</p>
-        <p class="cs"><em>Case</em>LED 美容面罩对比，ChatGPT 用 415nm 蓝光这一痘肌关键参数筛选并给 FDA 510(k) 备选，Migoo 首推 19 美元无 FDA 款<a class="qc" href="#q4">Q4</a>；吹风机题 ChatGPT 讲无刷电机对营销词、80 到 90 分贝对 59 分贝，Migoo 只列参数<a class="qc" href="#q1">Q1</a>。</p>
-        <p class="op"><em>理想态</em>像一个懂行的朋友：知道这个品类的公认好货和坑，能说出为什么，给出的判断让用户信得过。</p></li>
-      <li><b>候选质量</b>
-        <p class="pr"><em>当前问题</em>目录首推落在白牌低价款，用户认得的品牌只在站外补充；增益项输掉的题多数输在这里。</p>
-        <p class="cs"><em>Case</em>15 美元内玻尿酸精华，Migoo 首推两款 1.09 美元白牌，ChatGPT 给 The Ordinary、Good Molecules、INKEY List<a class="qc" href="#q6">Q6</a>；混合肌护肤套装，Migoo 给 MEDB、PURE K，ChatGPT 给 COSRX、Beauty of Joseon<a class="qc" href="#q14">Q14</a>；送礼题 Migoo 给白牌护肤套装和抹茶碗<a class="qc" href="#q10">Q10</a>。</p>
-        <p class="op"><em>理想态</em>首推是用户一看就认得、敢买的品牌或口碑款，预算内优先给好货而不是最便宜的；目录里没有好货时，坦白说并指向站外。</p></li>
-      <li><b>回答结构与呈现</b>
-        <p class="pr"><em>当前问题</em>17 题一个结构："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"；只列参数不讲取舍，护肤题没有流程，穿搭题没有效果图，清单题整套不互搭。</p>
-        <p class="cs"><em>Case</em>婚礼穿搭，ChatGPT 先给上身效果图再给单品，Migoo 给卡片<a class="qc" href="#q15">Q15</a>；250 美元胶囊衣橱，ChatGPT 7 件可互搭并给 5 天穿搭组合，Migoo 亮粉上衣配黄鞋、尺码 XL、XXL、42 混搭<a class="qc" href="#q13">Q13</a>；护肤套装 ChatGPT 给早晚步骤，Migoo 没有流程<a class="qc" href="#q14">Q14</a>；指甲清单 Migoo 反而赢在给了具体套装和价格<a class="qc" href="#q17">Q17</a>。</p>
-        <p class="op"><em>理想态</em>结构随题变：决策题结论先行，对比题出表格，搭配题出整体效果图再出单品，清单题分项价加合计且整套能互搭。商品卡是优势，保留。</p></li>
-      <li><b>首 token 时延</b>
-        <p class="pr"><em>当前问题</em>复测中位数 Migoo 28 秒，ChatGPT 8.7 秒，17 道文字题全部更慢；而且前 10 秒页面没有任何反馈。</p>
-        <p class="cs"><em>Case</em>多约束吸尘器题 Migoo 首 token 最慢的一档，ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"<a class="qc" href="#q2">Q2</a><a class="qc" href="#q13">Q13</a>。</p>
-        <p class="op"><em>理想态</em>1 秒内让用户知道在干什么，几秒内先看到结论或框架，商品卡随后补上，不让用户对着空白等半分钟。</p></li>
-      <li><b>评测跟上</b>
-        <p class="pr"><em>当前问题</em>现在的 Rubrics 以"交付了没有"为主，意图理解、判断质量、呈现适配都在增益项，权重只有 20%；按这个评测优化，方向会被拉回"多出卡片"。</p>
-        <p class="cs"><em>Case</em>吹风机题 Migoo 交付了 5 张卡片、必要项满分，但用户真正想要的"该怎么选"只有 ChatGPT 给了；按现行权重两边差距很小<a class="qc" href="#q1">Q1</a>。</p>
-        <p class="op"><em>理想态</em>评测能分出"交付了"和"帮到了"：是否理解了真实意图、是否给了明确判断、呈现是否匹配题型，都成为有权重的考点；每个模块改完用同一套题回归。</p></li>
-    </ol>
-    <p class="prio"><b>优先级</b>：先做意图理解和回答结构，同时评估基模；候选质量和时延是单点修复；评测先调好，保证方向不跑偏。</p>
+    <h2>优化点（按模块）</h2>
+    <p class="optlead">只描述当前问题、case 和理想态，不给技术解法；怎么做由技术评审定。</p>
+    <div class="tblwrap"><table class="opt">
+      <thead><tr><th>模块</th><th class="pr">当前问题</th><th>Case</th><th class="op">理想态</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>1. 意图理解与回答模式</b><span class="k">最关键</span></td>
+          <td class="pr">把题都当"找商品"处理。该给判断的题，判断要么没给、要么给了但不准；该给效果图的给卡片。</td>
+          <td>问美妆冰箱和蒸脸仪先买哪个，ChatGPT 说两样都不是必需，Migoo 只排了先后<a class="qc" href="#q5">Q5</a>；问 Airwrap 值不值，ChatGPT 说"别买，买 Shark"，Migoo 给 6 款白牌造型器<a class="qc" href="#q3">Q3</a>；指定 Stanley 某型号，Migoo 找不到就给了另一型号当作完成<a class="qc" href="#q9">Q9</a>。</td>
+          <td class="op">回答前先分清用户要的是判断、对比、搭配还是具体商品；该给结论先给结论，该说"不建议买"就说，该追问先追问，再去找商品。</td>
+        </tr>
+        <tr>
+          <td><b>2. 知识获取与工具调用</b></td>
+          <td class="pr">有 Web 搜索和知识库工具，但该用的时候没用：平替、参数怎么看这类知识题只搜了商品目录，所以答不出公认平替和关键参数。</td>
+          <td>Airwrap 题 Migoo 只调了商品搜索，没调 Web 搜索，不知道 Shark FlexStyle 是公认平替<a class="qc" href="#q3">Q3</a>；LED 面罩题 ChatGPT 用 415nm 蓝光筛选并给 FDA 备选，Migoo 首推 19 美元无 FDA 款<a class="qc" href="#q4">Q4</a>；吹风机题 ChatGPT 讲无刷电机对营销词，Migoo 只列参数<a class="qc" href="#q1">Q1</a>。</td>
+          <td class="op">遇到"值不值、平替、怎么选、看什么参数"时主动去查 Web 和知识库，把公认结论和关键参数带进回答，再去配商品。</td>
+        </tr>
+        <tr>
+          <td><b>3. 候选质量</b></td>
+          <td class="pr">目录首推落在白牌低价款，用户认得的品牌只在站外补充；增益项输掉的题多数输在这里。</td>
+          <td>15 美元内玻尿酸精华，Migoo 首推两款 1.09 美元白牌，ChatGPT 给 The Ordinary、INKEY List<a class="qc" href="#q6">Q6</a>；混合肌护肤套装，Migoo 给 MEDB、PURE K，ChatGPT 给 COSRX、Beauty of Joseon<a class="qc" href="#q14">Q14</a>；送礼题 Migoo 给白牌护肤套装和抹茶碗<a class="qc" href="#q10">Q10</a>。</td>
+          <td class="op">首推是用户一看就认得、敢买的品牌或口碑款，预算内优先给好货而不是最便宜的；目录里没有好货时坦白说并指向站外。</td>
+        </tr>
+        <tr>
+          <td><b>4. 回答结构与呈现</b></td>
+          <td class="pr">17 题一个结构："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"；只列参数不讲取舍，护肤题没有流程，穿搭题没有效果图，清单题整套不互搭。</td>
+          <td>婚礼穿搭，ChatGPT 先给上身效果图再给单品，Migoo 给卡片<a class="qc" href="#q15">Q15</a>；250 美元胶囊衣橱，ChatGPT 7 件可互搭并给 5 天组合，Migoo 亮粉上衣配黄鞋、尺码混搭<a class="qc" href="#q13">Q13</a>；护肤套装 ChatGPT 给早晚步骤，Migoo 没有<a class="qc" href="#q14">Q14</a>。</td>
+          <td class="op">结构随题变：决策题结论先行，对比题出表格，搭配题先效果图再单品，清单题分项价加合计且整套能互搭。商品卡是优势，保留。</td>
+        </tr>
+        <tr>
+          <td><b>5. 首 token 时延</b></td>
+          <td class="pr">复测中位数 Migoo 28 秒，ChatGPT 8.7 秒，17 道文字题全部更慢；前 10 秒页面没有任何反馈。</td>
+          <td>多约束吸尘器题 Migoo 首 token 80 秒，ChatGPT 7.5 秒<a class="qc" href="#q2">Q2</a>；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"<a class="qc" href="#q13">Q13</a>。</td>
+          <td class="op">1 秒内让用户知道在干什么，几秒内先看到结论或框架，商品卡随后补上。</td>
+        </tr>
+        <tr>
+          <td><b>6. 评测跟上</b></td>
+          <td class="pr">现在的 Rubrics 以"交付了没有"为主，意图理解、判断质量、呈现适配都在增益项，权重只有 20%；按这个评测优化，方向会被拉回"多出卡片"。</td>
+          <td>吹风机题 Migoo 交付了 5 张卡片、必要项满分，但用户真正想要的"该怎么选"只有 ChatGPT 给了，按现行权重两边差距很小<a class="qc" href="#q1">Q1</a>。</td>
+          <td class="op">评测能分出"交付了"和"帮到了"：是否理解了真实意图、是否给了明确判断、呈现是否匹配题型，都成为有权重的考点。</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <p class="prio"><b>优先级</b>：先做意图理解和回答结构，同时补知识获取的工具调用；候选质量和时延是单点修复；评测先调好，保证方向不跑偏。</p>
   </div>
 </section>
 
