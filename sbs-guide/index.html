@@ -27,13 +27,13 @@ a{color:var(--blue)}
 .kpi b{font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
 .kpi.m b{color:var(--blue)} .kpi.g b{color:var(--ink)}
 /* summary band */
-.summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:14px;margin-bottom:18px}
-@media (max-width:1100px){.summary{grid-template-columns:1fr}}
+.summary{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:18px}
+
 @media (max-width:720px){.summary{grid-template-columns:1fr}}
 .sum{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
 .sum h2{font-size:13px;color:var(--ink3);font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sum h2 .tag{margin:0}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(96px,1fr));gap:8px}
 .tile{border-radius:10px;padding:10px 12px;background:#f7f8fa}
 .tile .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
 .tile .l{font-size:11.5px;color:var(--ink3);margin-top:3px}
@@ -70,6 +70,28 @@ a{color:var(--blue)}
 .prio b{color:var(--amber)}
 .appendix{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
 @media (max-width:900px){.appendix{grid-template-columns:1fr}}
+
+/* results card */
+.reshead{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.reshead .tiles{flex:1 1 420px;min-width:0}
+.reshead .ttft-sum{margin-top:0;flex:0 1 auto}
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px}
+@media (max-width:900px){.cats{grid-template-columns:1fr}}
+.cat{min-width:0}
+.cat h3{font-size:12.5px;font-weight:600;color:var(--ink3);letter-spacing:.04em;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.cat h3 .tag{margin:0}
+.cat ul{padding-left:16px;font-size:12.5px}
+.cat li{margin:4px 0;line-height:1.55}
+table.sc{width:100%;border-collapse:collapse;font-size:12.5px;color:var(--ink2)}
+table.sc th{font-weight:600;color:var(--ink3);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.sc td{padding:5px 6px;border-bottom:1px solid #eef1f5;vertical-align:top;line-height:1.5}
+table.sc td:first-child{white-space:nowrap;color:var(--ink);font-weight:600}
+table.sc th.m,table.sc td.m{color:var(--blue);text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+table.sc th.g,table.sc td.g{color:var(--ink);text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+table.sc th.t,table.sc td.t{color:var(--amber);text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+table.sc td:nth-child(2){text-align:center;font-variant-numeric:tabular-nums}
+.mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 22px}
+@media (max-width:900px){.mods{grid-template-columns:1fr}}
 /* workbench */
 .app{display:grid;grid-template-columns:250px minmax(0,1fr) 320px;gap:16px;align-items:start}
 @media (max-width:1100px){.app{grid-template-columns:230px minmax(0,1fr)} aside.notes{grid-column:1/-1;position:static;max-height:none}}
@@ -197,19 +219,57 @@ aside.notes h3:first-child{margin-top:0}
 </div>
 
 <section class="summary" aria-label="总结">
-  <div class="sum">
+  <div class="sum res">
     <h2>本次 SBS 结果</h2>
-    <div class="tiles">
-      <div class="tile m"><div class="v">3</div><div class="l">Migoo 优</div></div>
-      <div class="tile g"><div class="v">13</div><div class="l">ChatGPT 优</div></div>
-      <div class="tile t"><div class="v">3</div><div class="l">持平</div></div>
-      <div class="tile"><div class="v">19</div><div class="l">题数（含 2 道图片题）</div></div>
+    <div class="reshead">
+      <div class="tiles">
+        <div class="tile m"><div class="v">3</div><div class="l">Migoo 优</div></div>
+        <div class="tile g"><div class="v">13</div><div class="l">ChatGPT 优</div></div>
+        <div class="tile t"><div class="v">3</div><div class="l">持平</div></div>
+        <div class="tile"><div class="v">19</div><div class="l">题数（含 2 道图片题）</div></div>
+      </div>
+      <div class="ttft-sum" id="ttftsum"></div>
     </div>
-    <ul>
-      <li><b>ChatGPT 赢在 agentic</b>：先理解 query 背后的真实意图，再决定回什么、怎么回。婚礼穿搭先给上身效果图再给单品（第 13 题）；美妆冰箱和蒸脸仪直接说都不是必需（第 5 题）；Airwrap 给出"别买，买 Shark FlexStyle"（第 3 题）。候选是用户认得的品牌，决策题带行业常识。</li>
-      <li><b>Migoo 的表现</b>：按 query 字面执行，搜到什么给什么。交付很稳，每题都有可直接购买的商品卡；多约束题硬给出预算内候选并逐条对应（第 2 题），S 码标得明确（第 15 题），清单题直接给套装和价格（第 17 题）。但不替用户做判断，也不换呈现方式。</li>
-    </ul>
-    <div class="ttft-sum" id="ttftsum"></div>
+    <div class="cats">
+      <div class="cat">
+        <h3>按场景</h3>
+        <table class="sc">
+          <thead><tr><th>场景</th><th>题</th><th class="m">Migoo</th><th class="g">ChatGPT</th><th class="t">平</th><th>结论</th></tr></thead>
+          <tbody>
+            <tr><td>大件复杂决策</td><td>5</td><td class="m">1</td><td class="g">4</td><td class="t">0</td><td>两边都能交付，ChatGPT 靠判断和解释赢增益；Migoo 只在多约束题（<a class="qc" href="#q2">Q2</a>）硬约束对得更全</td></tr>
+            <tr><td>基础找商品</td><td>4</td><td class="m">0</td><td class="g">3</td><td class="t">1</td><td>Migoo 首推白牌低价款；指定型号没货换型号交差（<a class="qc" href="#q9">Q9</a>）</td></tr>
+            <tr><td>送礼</td><td>3</td><td class="m">0</td><td class="g">2</td><td class="t">1</td><td>ChatGPT 给人设对应的品牌和礼物组合；送达题两边都没给判断</td></tr>
+            <tr><td>搭配清单</td><td>5</td><td class="m">2</td><td class="g">3</td><td class="t">0</td><td>Migoo 赢在给具体商品和尺码（<a class="qc" href="#q15">Q15</a><a class="qc" href="#q17">Q17</a>）；输在整套不互搭（<a class="qc" href="#q13">Q13</a>）</td></tr>
+            <tr><td>截图找同款</td><td>2</td><td class="m">0</td><td class="g">1</td><td class="t">1</td><td>两边都认出叠穿、都没找到同款；Migoo 链接打不开输必要项</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cat">
+        <h3>必要项 <span class="tag must">任务有没有完成</span></h3>
+        <ul>
+          <li><b>Migoo 赢的 3 题全靠必要项</b>：多约束逐条对应（<a class="qc" href="#q2">Q2</a>）、裙子标明 S 码（<a class="qc" href="#q15">Q15</a>）、清单给具体商品和价格（<a class="qc" href="#q17">Q17</a>）。ChatGPT 这三题分别超预算、未确认库存、只给品类。</li>
+          <li><b>Migoo 被封顶的题</b>：指定型号没货给另一型号（<a class="qc" href="#q9">Q9</a>）、胶囊衣橱颜色尺码不互搭（<a class="qc" href="#q13">Q13</a>）、英镑英国站（<a class="qc" href="#q16">Q16</a>）、链接 404（<a class="qc" href="#q18">Q18</a>）。</li>
+          <li><b>两边同时封顶</b>：视黄醇眼霜只给 CeraVe（<a class="qc" href="#q8">Q8</a>）、周五前能否送达没判断（<a class="qc" href="#q11">Q11</a>）、Prada 平替没给具体商品（<a class="qc" href="#q12">Q12</a>）、没查到尺码表（<a class="qc" href="#q19">Q19</a>）。这些题转到增益项比。</li>
+        </ul>
+      </div>
+      <div class="cat">
+        <h3>增益项 <span class="tag gain">完成得好不好</span></h3>
+        <ul>
+          <li><b>ChatGPT 赢的 13 题里 9 题赢在增益</b>，来源三个：候选优质性（Laifen、Shark、The Ordinary、COSRX 这类用户认得的品牌）；解释质量（无刷电机对营销词、415nm 蓝光、早晚护肤流程）；特异性增益（剩余预算怎么花、四家比价、三个礼物组合）。</li>
+          <li><b>Migoo 增益项只赢 2 处</b>：点名仿品站并提出 Coach、Kate Spade 方向（<a class="qc" href="#q12">Q12</a>）；逐件说明领型袖型差异并给组合价（<a class="qc" href="#q18">Q18</a>）。</li>
+          <li><b>Migoo 增益项的固定短板</b>：首推 1.09 美元精华、7 美元吹风机（<a class="qc" href="#q6">Q6</a><a class="qc" href="#q1">Q1</a>）；只列参数不讲取舍；送达只说"结账时看"。</li>
+        </ul>
+      </div>
+      <div class="cat">
+        <h3>两边的打法</h3>
+        <ul>
+          <li><b>ChatGPT 是 agentic 的</b>：先理解 query 背后的真实意图，再决定回什么、怎么回。婚礼穿搭先给上身效果图再给单品（<a class="qc" href="#q13">Q13</a>）；美妆冰箱和蒸脸仪直接说都不是必需、钱该花在别处（<a class="qc" href="#q5">Q5</a>）；Airwrap 说"别买，买 Shark FlexStyle"（<a class="qc" href="#q3">Q3</a>）。回答结构随题变：预算表、5 天穿搭组合、四家比价表、"我的结论"段。</li>
+          <li><b>Migoo 是按字面执行的</b>：搜到什么给什么，不替用户做判断，17 题一个结构："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"。</li>
+          <li><b>Migoo 的优势要保留</b>：每题都有可直接购买的商品卡；显性约束（预算、尺码、同店）对得认真；清单题直接落到具体套装和价格。</li>
+          <li><b>时延</b>：首 token 中位 Migoo 28.0 秒对 ChatGPT 8.7 秒，17 道文字题全部更慢；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"。</li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="sum opt">
     <h2>优化点（按模块） <span class="tag lose">问题</span><span class="tag blue">优化</span><span class="tag gain">建议，非最终方案</span></h2>
