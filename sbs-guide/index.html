@@ -303,7 +303,7 @@ aside.notes h3:first-child{margin-top:0}
     <div class="composer">
       <label for="qbox" hidden>问题</label>
       <textarea id="qbox" readonly></textarea>
-      <button class="btn" id="send">发送</button>
+      <button class="btn" id="send" title="按真实首 token 比例重放一次发送过程">重放发送</button>
     </div>
     <div class="meta" id="meta"></div>
     <div id="thread" style="display:flex;flex-direction:column;gap:12px"></div>
@@ -390,9 +390,10 @@ function select(n){
   const d=DATA[n];const en=d?d.q:QEN[n];
   $("#qbox").value=en;
   $("#meta").innerHTML=`<span class="mono">Q${String(n).padStart(2,"0")}</span><span>${SCENES[SCENE_OF[n]]}</span><span class="zh">${esc(ZH[n])}</span>${d&&d.img?`<span class="tag blue">带图</span>`:""}`;
-  $("#thread").innerHTML=d?`<div class="empty">点「发送」把这条问题${d.img?"和图片":""}同时发给 Migoo 和 ChatGPT。</div>`:`<div class="empty">这题需要上传图片，本次没有跑。</div>`;
+  $("#thread").innerHTML=d?"":`<div class="empty">这题需要上传图片，本次没有跑。</div>`;
   $("#send").disabled=!d;
   renderVerdict(n);
+  if(d) send(null,true);
 }
 function renderVerdict(n){
   const j=J[n];const v=$("#verdict");const t=TTFT[n]||{};
@@ -482,17 +483,17 @@ function autoHL(){
   const j=J[cur]; const items=[]; j.pts.forEach(p=>{(p[4]||[]).forEach(h=>{ if(items.length<4) items.push(h); });});
   showHL(items,false);
 }
-function send(after){
+function send(after,instant){
   const n=cur;const d=DATA[n];if(!d)return; clearHL();
   const t=$("#thread");t.innerHTML=`${d.img?`<img class="ubimg fade" src="${d.img}" alt="用户上传的图片">`:""}<div class="bubble fade">${esc(d.q)}</div><div class="panes">${pane("migoo","Migoo Web",d.img?"登录态 · 用户手动发图":"登录态 · Mock Region US",n)}${pane("gpt","ChatGPT Web",d.img?"登录态 · 用户手动发图":"游客模式 · gpt-6",n)}</div>`;
   $("#send").disabled=true;
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const tt=TTFT[n]||{};
-  const delay=(v,def)=>reduce?0:Math.min(4000,Math.max(500,(v!=null?v:def)*400));
+  const delay=(v,def)=>(reduce||instant)?0:Math.min(4000,Math.max(500,(v!=null?v:def)*400));
   const show=(side,ms)=>setTimeout(()=>{const p=t.querySelector(".pane."+side);if(!p)return;const typ=p.querySelector(".typing");if(typ)typ.remove();p.insertAdjacentHTML("beforeend",replyHTML(side,n));},ms);
   const dm=delay(tt.m_first,3), dg=delay(tt.g_first,4);
   show("migoo",dm);show("gpt",dg);
-  hlTimer=setTimeout(()=>{$("#send").disabled=false; if(after) after(); else autoHL();},Math.max(dm,dg)+500);
+  hlTimer=setTimeout(()=>{$("#send").disabled=false; if(after) after(); else autoHL();},instant?300:Math.max(dm,dg)+500);
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest(".seg button");if(!b)return;
