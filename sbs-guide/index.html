@@ -53,6 +53,38 @@ a{color:var(--blue)}
 .tag.blue{background:var(--blue-bg);color:var(--blue)}
 .ttft-sum{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 .ttft-sum .kpi{padding:4px 10px}
+
+/* action band: 问题 / 迭代点 / 如何迭代 */
+.act{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:18px;min-width:0}
+.act h2{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.act .lead{color:var(--ink3);font-size:12.5px;margin:0 0 12px}
+.act h3{font-size:12.5px;font-weight:600;color:var(--ink3);letter-spacing:.04em;margin:14px 0 8px;display:flex;align-items:center;gap:8px}
+.probs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.probs{grid-template-columns:1fr}}
+.prob{display:grid;grid-template-columns:auto 1fr;gap:10px;background:var(--red-bg);border-left:3px solid var(--red);border-radius:8px;padding:10px 12px;min-width:0}
+.prob .id{font-size:11px;font-weight:700;color:var(--red-ink);background:#fff;border-radius:4px;padding:0 6px;line-height:18px;height:18px;margin-top:2px;font-variant-numeric:tabular-nums}
+.prob b{display:block;color:var(--ink);font-size:13.5px;line-height:1.45}
+.prob p{margin:3px 0 0;color:var(--ink2);font-size:12.5px;line-height:1.55}
+.qcs{margin-top:5px;display:flex;gap:4px;flex-wrap:wrap}
+.qc{font-size:11px;font-weight:600;color:var(--red-ink);background:#fff;border:1px solid #f3c6c8;border-radius:4px;padding:0 6px;line-height:18px;text-decoration:none}
+.qc:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.iters{display:flex;flex-direction:column;gap:8px}
+.iter{display:grid;grid-template-columns:minmax(220px,0.9fr) minmax(0,1.6fr);gap:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0;background:#fbfcfe}
+@media (max-width:900px){.iter{grid-template-columns:1fr}}
+.iter .what{min-width:0}
+.iter .id{display:inline-block;font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-bg);border-radius:4px;padding:0 6px;line-height:18px;margin-right:6px;font-variant-numeric:tabular-nums}
+.iter .what b{color:var(--ink);font-size:13.5px}
+.iter .what p{margin:4px 0 0;color:var(--ink2);font-size:12.5px;line-height:1.55}
+.iter .maps{margin-top:5px;display:flex;gap:4px;flex-wrap:wrap}
+.pm{font-size:10.5px;font-weight:600;color:var(--red-ink);background:var(--red-bg);border-radius:4px;padding:0 6px;line-height:17px}
+.iter .how{min-width:0;border-left:1px dashed var(--line);padding-left:12px}
+@media (max-width:900px){.iter .how{border-left:0;padding-left:0;border-top:1px dashed var(--line);padding-top:8px}}
+.iter .how .lab{font-size:11px;font-weight:600;color:var(--amber);background:var(--amber-bg);border-radius:4px;padding:0 6px;line-height:18px;display:inline-block;margin-bottom:4px}
+.iter .how ul{margin:0;padding-left:16px;color:var(--ink2);font-size:12.5px;line-height:1.55}
+.iter .how li{margin:2px 0}
+.iter .how li b{color:var(--ink);font-weight:600}
+.note{display:flex;gap:8px;align-items:flex-start;background:var(--amber-bg);border-radius:8px;padding:8px 12px;color:var(--ink2);font-size:12.5px;margin:0 0 10px}
+.note .tag{margin-top:2px;flex:none}
 /* workbench */
 .app{display:grid;grid-template-columns:250px minmax(0,1fr) 320px;gap:16px;align-items:start}
 @media (max-width:1100px){.app{grid-template-columns:230px minmax(0,1fr)} aside.notes{grid-column:1/-1;position:static;max-height:none}}
@@ -189,9 +221,8 @@ aside.notes h3:first-child{margin-top:0}
       <div class="tile"><div class="v">19</div><div class="l">题数（含 2 道图片题）</div></div>
     </div>
     <ul>
-      <li><b>ChatGPT 赢在 agentic</b>：先理解 query 背后的真实意图，再决定回什么。找婚礼穿搭时先给整体上身效果图让用户想象场合，再给单品；问美妆冰箱和蒸脸仪时直接说这两样都不是必需、钱可以花在更有用的地方；问 Airwrap 时给出"别买，买 Shark FlexStyle"的判断。候选是用户认得的品牌，决策题带行业常识（415nm 蓝光），美区和履约条件会去核实。</li>
-      <li><b>Migoo 的表现</b>：循规蹈矩地按 query 字面执行，搜到什么给什么。交付很稳，所有题都带可直接购买的商品卡，多约束题硬给出预算内候选并逐条对应（第 2 题），显性约束如 S 码标得明确（第 15 题），清单题直接给具体套装和价格（第 17 题）。但不会替用户做判断，也不会换一种呈现方式。</li>
-      <li><b>Migoo 输在</b>：目录首推落在 1 美元精华、7 美元吹风机这类白牌低价款；出现英镑标价的英国站；带入账号记忆（暖黄皮、EU 42 鞋码）；胶囊衣橱颜色尺码不一致；回复结构固定为"分组 + 卡片 + 一段取舍"，没有按题目类型变化。</li>
+      <li><b>ChatGPT 赢在 agentic</b>：先理解 query 背后的真实意图，再决定回什么、怎么回。婚礼穿搭先给上身效果图再给单品（第 13 题）；美妆冰箱和蒸脸仪直接说都不是必需（第 5 题）；Airwrap 给出"别买，买 Shark FlexStyle"（第 3 题）。候选是用户认得的品牌，决策题带行业常识，美区和履约条件会去核实。</li>
+      <li><b>Migoo 的表现</b>：按 query 字面执行，搜到什么给什么。交付很稳，每题都有可直接购买的商品卡；多约束题硬给出预算内候选并逐条对应（第 2 题），S 码标得明确（第 15 题），清单题直接给套装和价格（第 17 题）。但不替用户做判断，也不换呈现方式。具体问题见下方「问题是什么」。</li>
     </ul>
     <div class="ttft-sum" id="ttftsum"></div>
   </div>
@@ -213,6 +244,88 @@ aside.notes h3:first-child{margin-top:0}
       <dt>TTFT</dt><dd>首 token 耗时为 2026-11-06 用同样方式复测一次得到，与页面上展示的回复不是同一次运行；计时从按下发送到答案正文出现第一个字。</dd>
       <dt>截图</dt><dd>两边回复均为当时页面的真实内容；ChatGPT 的商品图从截图裁切作示意，裁不到的位置显示它的搜索词。</dd>
     </dl>
+  </div>
+</section>
+
+<section class="act" aria-label="问题与迭代">
+  <h2>从 SBS 到迭代 <span class="tag lose">问题</span><span class="tag blue">迭代点</span><span class="tag gain">如何迭代</span></h2>
+  <p class="lead">问题来自 19 题复判和 Langfuse trace、agent-core 代码的对照；点题号可跳到对应题目看红框。</p>
+
+  <h3>一、问题是什么</h3>
+  <div class="probs">
+    <div class="prob"><span class="id">P1</span><div><b>只按 query 字面执行，不替用户做判断</b><p>问"美妆冰箱还是蒸脸仪"只排优先级，不说两样本就非必需；问 Airwrap 没提更优的 Shark；送达时效只说"结账时看"；指定型号没货就给另一型号交差。</p><div class="qcs"><a class="qc" href="#q5">Q5</a><a class="qc" href="#q3">Q3</a><a class="qc" href="#q11">Q11</a><a class="qc" href="#q9">Q9</a><a class="qc" href="#q8">Q8</a></div></div></div>
+    <div class="prob"><span class="id">P2</span><div><b>候选落在白牌低价款，缺品牌和质量先验</b><p>首推 7 美元吹风机、1.09 美元精华、19 美元无 FDA 美容仪；知名品牌只在站外补充。增益项输掉的题多数输在这里。</p><div class="qcs"><a class="qc" href="#q1">Q1</a><a class="qc" href="#q3">Q3</a><a class="qc" href="#q4">Q4</a><a class="qc" href="#q6">Q6</a><a class="qc" href="#q10">Q10</a><a class="qc" href="#q14">Q14</a></div></div></div>
+    <div class="prob"><span class="id">P3</span><div><b>美区和链接口径不严</b><p>出现英镑标价的英国站、免邮未确认；给出的 Target 链接打开是 page not found。这类是必要项封顶，直接输题。</p><div class="qcs"><a class="qc" href="#q16">Q16</a><a class="qc" href="#q18">Q18</a></div></div></div>
+    <div class="prob"><span class="id">P4</span><div><b>账号记忆越界带入</b><p>用户本轮没说，却按"暖黄皮"筛色号、按 EU 42 选鞋，且回复里不说明来源，用户看不懂为什么。</p><div class="qcs"><a class="qc" href="#q7">Q7</a><a class="qc" href="#q15">Q15</a></div></div></div>
+    <div class="prob"><span class="id">P5</span><div><b>清单题内部不一致</b><p>胶囊衣橱里亮粉上衣配黄鞋，尺码 XL、XXL、42 混搭，单品都对但整套不能互搭。</p><div class="qcs"><a class="qc" href="#q13">Q13</a></div></div></div>
+    <div class="prob"><span class="id">P6</span><div><b>解释薄，呈现一套模板到底</b><p>只列参数不讲取舍，护肤题没有早晚流程；所有题都是"分组 + 卡片 + 一段取舍"，穿搭题没有上身效果图，决策题也不换形态。</p><div class="qcs"><a class="qc" href="#q1">Q1</a><a class="qc" href="#q14">Q14</a><a class="qc" href="#q13">Q13</a><a class="qc" href="#q5">Q5</a></div></div></div>
+    <div class="prob"><span class="id">P7</span><div><b>首 token 慢</b><p>中位 28.0 秒，ChatGPT 8.7 秒，17 道文字题全部更慢。主要耗时在搜索侧 rerank（封顶 10 秒）和 filter_llm（12 到 16 秒）。</p><div class="qcs"><a class="qc" href="#q2">Q2</a><a class="qc" href="#q13">Q13</a></div></div></div>
+  </div>
+
+  <h3>二、迭代点是什么 <span style="font-weight:400">和</span> 三、如何迭代</h3>
+  <div class="note"><span class="tag gain">建议</span><span>右列只是建议，不作为最终技术方案；具体做法以技术评审结论为准。左列是要解决什么，右列是可以从哪里下手。</span></div>
+  <div class="iters">
+    <div class="iter">
+      <div class="what"><span class="id">I1</span><b>意图与策略层</b><p>搜索前先判断用户真正要什么、该不该买、用什么形态回答；允许"别买"和"买别的"作为合法结论。</p><div class="maps"><span class="pm">P1</span><span class="pm">P6</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li><b>现状</b>：agentic 线的 QU 全在主模型一次 call_llm 里完成，agent-core 没有独立 QU 步骤；搜索工具契约是"每条 criterion 严格按原文搜，不放宽不替换"。</li>
+        <li>在调用搜索前加一个轻量的"意图与回答形态"步骤，输出真实需求、是否该买、回答形态，可借旧链路 qu_v2 的 strategy 阶段。</li>
+        <li>prompt 里明确允许"不推荐购买""站外有更优选"作为结论，而不是必须交付站内卡片。</li>
+        <li>放开"严格按原文搜"的契约，允许搜索侧 rewrite 做同义扩召。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I2</span><b>候选质量</b><p>召回和排序加入品牌、评分、销量先验，首推设质量门槛。</p><div class="maps"><span class="pm">P2</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>搜索侧 external_llm_rerank 加品牌、评分、销量特征，而不是只看相关性。</li>
+        <li>首推卡片设最低价格或评分门槛，1 美元级白牌不进前排。</li>
+        <li>主模型写 search_criteria 时加品牌词对冲，工具描述已鼓励，可在 prompt 里给示例。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I3</span><b>区域与链接校验</b><p>US 站点、USD 标价、链接可达作为硬约束，交付前校验。</p><div class="maps"><span class="pm">P3</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>搜索请求侧强制 region=US，结果过滤非 USD 标价。</li>
+        <li>出卡片前对链接做可达性检查（HEAD 请求或商品状态字段），打不开的不出。</li>
+        <li>免邮、送达这类履约条件没核实就如实写"未确认"，不要默认成立。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I4</span><b>记忆注入边界</b><p>只在和本轮问题相关时注入账号记忆，注入了要在回复里说明。</p><div class="maps"><span class="pm">P4</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>inject_user_memory 回调加相关性判断：尺码、肤色、肤质只在对应品类的题注入。</li>
+        <li>注入后在回复里带一句"按你之前记录的暖黄皮"，让用户能纠正。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I5</span><b>生成后自检</b><p>清单、套装、搭配类回复交付前做一致性检查。</p><div class="maps"><span class="pm">P5</span><span class="pm">P3</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>对清单、套装、搭配题加一次 verify 调用或规则校验：同一套装颜色协调、尺码一致、分项价加总等于总价。</li>
+        <li>校验不过就回到搜索换单品，而不是直接交付。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I6</span><b>呈现按题型适配</b><p>穿搭、决策、清单、找品各用不同回复形态，不是一套模板。</p><div class="maps"><span class="pm">P6</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>按五个场景定义 3 到 4 个回复模板：决策型（结论先行）、清单型（分类加合计）、搭配型（效果图加单品）、找品型（卡片加对比）。</li>
+        <li>搭配题试点上身效果图或 lookbook 图，模板选择由 I1 输出的"回答形态"驱动。</li>
+        <li>summary prompt 去掉"固定分组 + 一段取舍"的硬要求。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I7</span><b>延迟</b><p>缩短首 token，先出结论框架再出卡片。</p><div class="maps"><span class="pm">P7</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>降 rerank 封顶时间；filter_llm 改流式或拆小批次。</li>
+        <li>先流式输出结论和分组框架，卡片到了再补，不要等全部过滤完再开始说话。</li>
+      </ul></div>
+    </div>
+    <div class="iter">
+      <div class="what"><span class="id">I8</span><b>基模与 prompt（横向）</b><p>现有 DeepSeek V4 Flash 加严格 prompt 支撑不了 I1 和 I6，需要同步评估。</p><div class="maps"><span class="pm">P1</span><span class="pm">P6</span></div></div>
+      <div class="how"><span class="lab">如何迭代（建议）</span><ul>
+        <li>用本 19 题加评测集做基模 AB，看 I1 和 I6 是否靠换更强基模就能拿到大部分收益。</li>
+        <li>每个迭代点都用同一套题回归，看必要项封顶率和增益项胜率的变化，再决定做不做下一步。</li>
+      </ul></div>
+    </div>
   </div>
 </section>
 
