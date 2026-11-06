@@ -92,6 +92,12 @@ table.sc th.t,table.sc td.t{color:var(--amber);text-align:center;font-variant-nu
 table.sc td:nth-child(2){text-align:center;font-variant-numeric:tabular-nums}
 .mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 22px}
 @media (max-width:900px){.mods{grid-template-columns:1fr}}
+
+.optlead{color:var(--ink3);font-size:12.5px;margin:-4px 0 10px!important}
+.mods p em{font-style:normal;font-weight:600;font-size:11px;margin-right:6px;border-radius:4px;padding:0 5px;line-height:17px;display:inline-block;vertical-align:middle}
+.mods p.pr em{color:var(--red-ink);background:#fff}
+.mods p.cs{border-left-color:var(--line)} .mods p.cs em{color:var(--ink2);background:#f2f3f5}
+.mods p.op em{color:var(--blue);background:var(--blue-bg)}
 /* workbench */
 .app{display:grid;grid-template-columns:250px minmax(0,1fr) 320px;gap:16px;align-items:start}
 @media (max-width:1100px){.app{grid-template-columns:230px minmax(0,1fr)} aside.notes{grid-column:1/-1;position:static;max-height:none}}
@@ -272,28 +278,35 @@ aside.notes h3:first-child{margin-top:0}
     </div>
   </div>
   <div class="sum opt">
-    <h2>优化点（按模块） <span class="tag lose">问题</span><span class="tag blue">优化</span><span class="tag gain">建议，非最终方案</span></h2>
+    <h2>优化点（按模块） <span class="tag lose">当前问题</span><span class="tag form">Case</span><span class="tag blue">理想态</span></h2>
+    <p class="optlead">只描述问题和理想态，不给技术解法；怎么做由技术评审定。</p>
     <ol class="mods">
       <li><b>意图理解与回答模式选择</b><span class="k">最关键，目前没有</span>
-        <p class="pr">把所有题都当"找商品"处理：该判断的不判断（美妆冰箱、Airwrap），该给效果图的给卡片，指定型号没货就换型号交差。<a class="qc" href="#q5">Q5</a><a class="qc" href="#q3">Q3</a><a class="qc" href="#q9">Q9</a><a class="qc" href="#q11">Q11</a></p>
-        <p class="op">搜索前先识别题型（找品、决策、清单、搭配、咨询）和用户真正关心的点，输出"该给结论 / 该给效果图 / 该先追问"的回答策略，再去检索。现在 agentic 线没有独立 QU，这一层全压在主模型一次调用里，且搜索契约是严格按原文搜。</p></li>
-      <li><b>基模</b>
-        <p class="pr">不知道 Airwrap 的公认平替、痘肌看 415nm、美妆冰箱多数人用不上。这是世界知识和判断力的差距，和检索无关。<a class="qc" href="#q3">Q3</a><a class="qc" href="#q4">Q4</a><a class="qc" href="#q5">Q5</a></p>
-        <p class="op">现用 DeepSeek V4 Flash。用本 19 题加评测集做基模 AB，换更强推理模型会直接改善决策题，但解决不了候选排序，要和下一条一起做。</p></li>
-      <li><b>候选排序与检索策略</b>
-        <p class="pr">目录首推 1.09 美元精华、7 美元吹风机，知名品牌只在站外补充；增益项输掉的题多数输在这里。<a class="qc" href="#q1">Q1</a><a class="qc" href="#q6">Q6</a><a class="qc" href="#q10">Q10</a><a class="qc" href="#q14">Q14</a></p>
-        <p class="op">排序加品牌、评分、销量先验，白牌低价款不作首推；知识类问题（平替、参数怎么看）走 Web 检索补常识，不只搜目录。</p></li>
-      <li><b>回答模板与呈现放开</b>
-        <p class="pr">17 题一个样："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"；只列参数不讲取舍，护肤题没有早晚流程；清单题颜色尺码不互搭。<a class="qc" href="#q13">Q13</a><a class="qc" href="#q14">Q14</a><a class="qc" href="#q1">Q1</a></p>
-        <p class="op">允许先给结论、允许说"不建议买"；按题型加载体：搭配题整体效果图、对比题表格、清单题分项价和合计。清单和套装交付前自检颜色、尺码、总价一致。商品卡是优势，保留。</p></li>
+        <p class="pr"><em>当前问题</em>把所有题都当"找商品"处理：该做判断的不判断，该给效果图的给卡片，指定型号没货就换型号交差。</p>
+        <p class="cs"><em>Case</em>问"美妆冰箱和蒸脸仪先买哪个"，ChatGPT 说两样都不是必需、钱该花在别处，Migoo 只排了先后<a class="qc" href="#q5">Q5</a>；问 Airwrap 值不值，ChatGPT 说"别买，买 Shark FlexStyle"，Migoo 给 6 款白牌造型器<a class="qc" href="#q3">Q3</a>；指定 Stanley 某型号某颜色，Migoo 找不到就给了另一型号<a class="qc" href="#q9">Q9</a>。</p>
+        <p class="op"><em>理想态</em>回答前先想清楚用户到底要什么：是要一个判断、一个对比、一套搭配、还是一个具体商品；该给结论就先给结论，该说"不建议买"就说，该追问就先追问，然后才去找商品。</p></li>
+      <li><b>基模能力</b>
+        <p class="pr"><em>当前问题</em>缺世界知识和判断力：不知道 Airwrap 的公认平替、不知道痘肌看 415nm 蓝光、不知道美妆冰箱多数人用不上。这和检索无关，检索到了也判断不出来。</p>
+        <p class="cs"><em>Case</em>LED 美容面罩对比，ChatGPT 用 415nm 蓝光这一痘肌关键参数筛选并给 FDA 510(k) 备选，Migoo 首推 19 美元无 FDA 款<a class="qc" href="#q4">Q4</a>；吹风机题 ChatGPT 讲无刷电机对营销词、80 到 90 分贝对 59 分贝，Migoo 只列参数<a class="qc" href="#q1">Q1</a>。</p>
+        <p class="op"><em>理想态</em>像一个懂行的朋友：知道这个品类的公认好货和坑，能说出为什么，给出的判断让用户信得过。</p></li>
+      <li><b>候选质量</b>
+        <p class="pr"><em>当前问题</em>目录首推落在白牌低价款，用户认得的品牌只在站外补充；增益项输掉的题多数输在这里。</p>
+        <p class="cs"><em>Case</em>15 美元内玻尿酸精华，Migoo 首推两款 1.09 美元白牌，ChatGPT 给 The Ordinary、Good Molecules、INKEY List<a class="qc" href="#q6">Q6</a>；混合肌护肤套装，Migoo 给 MEDB、PURE K，ChatGPT 给 COSRX、Beauty of Joseon<a class="qc" href="#q14">Q14</a>；送礼题 Migoo 给白牌护肤套装和抹茶碗<a class="qc" href="#q10">Q10</a>。</p>
+        <p class="op"><em>理想态</em>首推是用户一看就认得、敢买的品牌或口碑款，预算内优先给好货而不是最便宜的；目录里没有好货时，坦白说并指向站外。</p></li>
+      <li><b>回答结构与呈现</b>
+        <p class="pr"><em>当前问题</em>17 题一个结构："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"；只列参数不讲取舍，护肤题没有流程，穿搭题没有效果图，清单题整套不互搭。</p>
+        <p class="cs"><em>Case</em>婚礼穿搭，ChatGPT 先给上身效果图再给单品，Migoo 给卡片<a class="qc" href="#q15">Q15</a>；250 美元胶囊衣橱，ChatGPT 7 件可互搭并给 5 天穿搭组合，Migoo 亮粉上衣配黄鞋、尺码 XL、XXL、42 混搭<a class="qc" href="#q13">Q13</a>；护肤套装 ChatGPT 给早晚步骤，Migoo 没有流程<a class="qc" href="#q14">Q14</a>；指甲清单 Migoo 反而赢在给了具体套装和价格<a class="qc" href="#q17">Q17</a>。</p>
+        <p class="op"><em>理想态</em>结构随题变：决策题结论先行，对比题出表格，搭配题出整体效果图再出单品，清单题分项价加合计且整套能互搭。商品卡是优势，保留。</p></li>
       <li><b>首 token 时延</b>
-        <p class="pr">复测中位数 Migoo 28 秒，ChatGPT 8.7 秒，17 题全输。ChatGPT 0.4 秒就显示"Searching the web"，Migoo 10 秒后才出"搜索中"。<a class="qc" href="#q2">Q2</a><a class="qc" href="#q13">Q13</a></p>
-        <p class="op">主要耗时在搜索侧 rerank（封顶 10 秒）和 filter_llm（12 到 16 秒）。状态要在 1 秒内出现，结论框架先流式输出，卡片到了再补。</p></li>
+        <p class="pr"><em>当前问题</em>复测中位数 Migoo 28 秒，ChatGPT 8.7 秒，17 道文字题全部更慢；而且前 10 秒页面没有任何反馈。</p>
+        <p class="cs"><em>Case</em>多约束吸尘器题 Migoo 首 token 最慢的一档，ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"<a class="qc" href="#q2">Q2</a><a class="qc" href="#q13">Q13</a>。</p>
+        <p class="op"><em>理想态</em>1 秒内让用户知道在干什么，几秒内先看到结论或框架，商品卡随后补上，不让用户对着空白等半分钟。</p></li>
       <li><b>评测跟上</b>
-        <p class="pr">现在的 Rubrics 以"交付了没有"为主，意图理解、判断质量、呈现适配都在增益项，权重只有 20%，优化方向会被拉回"多出卡片"。</p>
-        <p class="op">把"是否理解了真实意图""是否给了明确判断""呈现是否匹配题型"提成有权重的考点，每个模块改完用同一套题回归。</p></li>
+        <p class="pr"><em>当前问题</em>现在的 Rubrics 以"交付了没有"为主，意图理解、判断质量、呈现适配都在增益项，权重只有 20%；按这个评测优化，方向会被拉回"多出卡片"。</p>
+        <p class="cs"><em>Case</em>吹风机题 Migoo 交付了 5 张卡片、必要项满分，但用户真正想要的"该怎么选"只有 ChatGPT 给了；按现行权重两边差距很小<a class="qc" href="#q1">Q1</a>。</p>
+        <p class="op"><em>理想态</em>评测能分出"交付了"和"帮到了"：是否理解了真实意图、是否给了明确判断、呈现是否匹配题型，都成为有权重的考点；每个模块改完用同一套题回归。</p></li>
     </ol>
-    <p class="prio"><b>优先级</b>：先做意图层和模板放开（改 prompt 和流程就能见效），同时换基模做 AB；排序和时延是单点工程修复；评测保证方向不跑偏。</p>
+    <p class="prio"><b>优先级</b>：先做意图理解和回答结构，同时评估基模；候选质量和时延是单点修复；评测先调好，保证方向不跑偏。</p>
   </div>
 </section>
 
