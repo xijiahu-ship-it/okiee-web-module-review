@@ -152,8 +152,8 @@ table.opt .k{display:block;margin-top:4px;font-size:10.5px;font-weight:600;color
 
 .optlead{color:var(--ink3);font-size:12.5px;margin:-4px 0 10px!important}
 table.opt2 td{width:auto}
-table.opt2 td:first-child{white-space:normal;width:12%}
-table.opt2 td.op{width:auto}
+table.opt2 td:first-child{white-space:normal;width:22%;padding-right:18px}
+table.opt2 td.op{width:auto;padding-left:18px}
 table.opt2 ul{margin:0;padding-left:16px} table.opt2 li{margin:2px 0}
 table.opt2 .lead{color:var(--red-ink);font-weight:700;margin:0 0 4px}
 table.opt2 td.pr ul{color:var(--ink)}
@@ -314,11 +314,11 @@ aside.notes h3:first-child{margin-top:0}
     <p class="dnote"><b>速度</b>：首 token 中位 Migoo 28 秒、ChatGPT 8.7 秒，17 道文字题全部更慢；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"。</p>
   </div>
   <div class="sum opt">
-    <h2>优化建议（按模块，以 Migoo 为主体）<span class="tag blue">理想态</span></h2>
-    <p class="optlead">只写理想态，不给技术解法。两个页签展示同一份内容。</p>
+    <h2>优化点（按模块，以 Migoo 为主体）<span class="tag blue">理想态</span></h2>
+    <p class="optlead">只写理想态，不给技术解法；两个页签展示同一份内容。</p>
     <div class="tblwrap"><table class="opt opt2">
       <thead><tr><th>模块</th><th class="op">理想态</th></tr></thead>
-      <tbody><tr><td><b>1. 用户真实意图理解（agentic）</b></td><td class="op"><div class="lead">把用户当成有具体处境的人来回答，而不是把 query 当检索词执行</div><ul><li><b>是否回答了 query 背后用户真实的意图问题</b>：问"值不值"背后是"我这种情况该买什么"，敢答"别买，买 X"</li><li><b>换用户条件回答是否会变</b>：发质、肤质、场合、预算、新手还是懂行，是推理依据不是复述的标签</li><li><b>是否替用户提到了不想会后悔的事</b>：真伪、禁忌、尺码表、没货</li><li><b>关键供给信息是否核实</b>：读完回答能说出它认为用户要解决什么、依据了哪些条件、替用户多想了什么</li></ul></td></tr><tr><td><b>2. 回答结构与呈现</b></td><td class="op"><div class="lead">回答的结构跟着理解走，不预设模板</div><ul><li>用户要的是一个结果时，用法和组合方式是交付的一部分：护肤流程要早晚各用什么，穿搭要怎么互搭，新手套装要先买什么</li><li>每个候选能回答"为什么是它"，理由来自对用户的理解，不是参数复述</li><li>清单和搭配题交付前自检结果：颜色互搭、尺码一致、总价在预算内，任一不满足就换单品</li><li>商品卡保留，位置和数量由回答需要决定，不再是唯一载体</li></ul></td></tr><tr><td><b>3. 知识获取与工具调用</b></td><td class="op"><ul><li>回答里体现依据：公认平替是谁、关键参数是什么、来源是什么</li><li>查不到就说没有公认结论，不编</li></ul></td></tr><tr><td><b>4. 候选质量</b></td><td class="op"><div class="lead">在遵循用户预算的前提下出高质量候选</div><ul><li>首推是用户认得、敢买的品牌或口碑款，不是一味挑最便宜的</li><li>首推同时满足在预算内、有品牌或评分口碑、和需求对得上，缺一就往后排</li><li>预算内确实没有好货时明说，并给站外或加预算的选项</li></ul></td></tr><tr><td><b>5. 供给检索深度</b></td><td class="op"><div class="lead">推荐前到商家页面层拿实际值</div><ul><li>价格、库存、免邮门槛、送达日期、尺码表</li><li>送达题给判断和条件，同店免邮题核到门槛金额</li><li>看图题先识别是否有类似的品牌款式，再查该款尺码表，用围度给结论</li><li>不可行需求给最接近的真实可买候选，标明差异，附链接</li></ul></td></tr><tr><td><b>6. 首 token 时延</b></td><td class="op"><div class="lead">首 token 5 秒内，或至少和 ChatGPT 持平</div></td></tr><tr><td><b>7. 评测跟上</b></td><td class="op"><div class="lead">回答里的增益项加入到评测标准里，当前更多是基础体验</div><ul><li>是否回答了 query 背后的问题、换用户条件回答是否会变、是否替用户提了会后悔的事、用法和组合是否给到、关键供给信息是否核实</li></ul></td></tr></tbody>
+      <tbody><tr><td><b>1. 用户真实意图理解（agentic）</b></td><td class="op"><div class="lead">把用户当成有具体处境的人来回答，而不是把 query 当检索词执行</div><ul><li><b>是否回答了 query 背后用户真实的意图问题</b>：问"值不值"背后是"我这种情况该买什么"，敢答"别买，买 X"</li><li><b>依据用户条件 / 场景，回答会变</b>：发质、肤质、场合、预算、新手还是懂行，是推理依据不是复述的标签</li><li><b>是否替用户提到了不想会后悔的事</b>：真伪、禁忌、尺码表、没货</li><li><b>关键供给信息是否核实</b>：读完回答能说出它认为用户要解决什么、依据了哪些条件、替用户多想了什么</li></ul></td></tr><tr><td><b>2. 回答结构与呈现</b></td><td class="op"><div class="lead">回答的结构跟着理解走，不预设模板</div><ul><li><b>用户要的是一个结果时，也提供用法和组合方式</b>：如护肤流程要早晚各用什么，穿搭要怎么互搭，新手要先买什么</li><li><b>每个候选能回答"为什么是它"</b>：理由来自对用户的理解，不是参数复述</li><li><b>清单和搭配题交付前自检结果</b>：颜色互搭、尺码一致、总价在预算内，任一不满足就换单品</li></ul></td></tr><tr><td><b>3. 商品检索覆盖</b></td><td class="op"><div class="lead">回答结果覆盖了站内外来源（websearch 调用时机？）</div><ul><li>回答里体现依据：公认平替是谁、关键参数是什么、来源是什么</li><li>查不到就说没有公认结论，不编</li></ul></td></tr><tr><td><b>4. 商品候选质量</b></td><td class="op"><div class="lead">在遵循用户预算的前提下出高质量候选</div><ul><li><b>首推同时满足在预算内、有品牌或评分口碑</b>、和需求对得上，缺一就往后排</li><li>预算内确实没有好货时明说，并给站外或加预算的选项</li></ul></td></tr><tr><td><b>5. 商品检索深度</b></td><td class="op"><div class="lead">推荐前到商家页面层拿实际值</div><ul><li>价格、库存、免邮门槛、送达日期、尺码表</li><li>送达题给判断和条件，同店免邮题核到门槛金额</li><li>看图题先识别是否有类似的品牌款式，再查该款尺码表，用围度给结论</li><li>不可行需求给最接近的真实可买候选，标明差异，附链接</li></ul></td></tr><tr><td><b>6. 首 token 时延</b></td><td class="op"><div class="lead">首 token 5 秒内，或至少和 ChatGPT 持平</div></td></tr><tr><td><b>7. 评测跟上</b></td><td class="op"><div class="lead">回答里的增益项加入到评测标准里，当前更多是基础体验</div><ul><li>是否回答了 query 背后的问题、换用户条件回答是否会变、是否替用户提了会后悔的事、用法和组合是否给到、关键供给信息是否核实</li></ul></td></tr></tbody>
     </table></div>
   </div>
 </section>
@@ -345,11 +345,11 @@ aside.notes h3:first-child{margin-top:0}
     <p class="dnote"><b>速度</b>：两边都慢。Migoo 首 token 中位 28 秒，Muse 39.6 秒、结论中位要等 9 分钟；Migoo 只是相对 Muse 快，对照 ChatGPT 的 8.7 秒，Migoo 17 题全部更慢。Muse 的慢有一部分换来了核实结果。</p>
   </div>
   <div class="sum opt">
-    <h2>优化建议（按模块，以 Migoo 为主体）<span class="tag blue">理想态</span></h2>
-    <p class="optlead">只写理想态，不给技术解法。两个页签展示同一份内容。</p>
+    <h2>优化点（按模块，以 Migoo 为主体）<span class="tag blue">理想态</span></h2>
+    <p class="optlead">只写理想态，不给技术解法；两个页签展示同一份内容。</p>
     <div class="tblwrap"><table class="opt opt2">
       <thead><tr><th>模块</th><th class="op">理想态</th></tr></thead>
-      <tbody><tr><td><b>1. 用户真实意图理解（agentic）</b></td><td class="op"><div class="lead">把用户当成有具体处境的人来回答，而不是把 query 当检索词执行</div><ul><li><b>是否回答了 query 背后用户真实的意图问题</b>：问"值不值"背后是"我这种情况该买什么"，敢答"别买，买 X"</li><li><b>换用户条件回答是否会变</b>：发质、肤质、场合、预算、新手还是懂行，是推理依据不是复述的标签</li><li><b>是否替用户提到了不想会后悔的事</b>：真伪、禁忌、尺码表、没货</li><li><b>关键供给信息是否核实</b>：读完回答能说出它认为用户要解决什么、依据了哪些条件、替用户多想了什么</li></ul></td></tr><tr><td><b>2. 回答结构与呈现</b></td><td class="op"><div class="lead">回答的结构跟着理解走，不预设模板</div><ul><li>用户要的是一个结果时，用法和组合方式是交付的一部分：护肤流程要早晚各用什么，穿搭要怎么互搭，新手套装要先买什么</li><li>每个候选能回答"为什么是它"，理由来自对用户的理解，不是参数复述</li><li>清单和搭配题交付前自检结果：颜色互搭、尺码一致、总价在预算内，任一不满足就换单品</li><li>商品卡保留，位置和数量由回答需要决定，不再是唯一载体</li></ul></td></tr><tr><td><b>3. 知识获取与工具调用</b></td><td class="op"><ul><li>回答里体现依据：公认平替是谁、关键参数是什么、来源是什么</li><li>查不到就说没有公认结论，不编</li></ul></td></tr><tr><td><b>4. 候选质量</b></td><td class="op"><div class="lead">在遵循用户预算的前提下出高质量候选</div><ul><li>首推是用户认得、敢买的品牌或口碑款，不是一味挑最便宜的</li><li>首推同时满足在预算内、有品牌或评分口碑、和需求对得上，缺一就往后排</li><li>预算内确实没有好货时明说，并给站外或加预算的选项</li></ul></td></tr><tr><td><b>5. 供给检索深度</b></td><td class="op"><div class="lead">推荐前到商家页面层拿实际值</div><ul><li>价格、库存、免邮门槛、送达日期、尺码表</li><li>送达题给判断和条件，同店免邮题核到门槛金额</li><li>看图题先识别是否有类似的品牌款式，再查该款尺码表，用围度给结论</li><li>不可行需求给最接近的真实可买候选，标明差异，附链接</li></ul></td></tr><tr><td><b>6. 首 token 时延</b></td><td class="op"><div class="lead">首 token 5 秒内，或至少和 ChatGPT 持平</div></td></tr><tr><td><b>7. 评测跟上</b></td><td class="op"><div class="lead">回答里的增益项加入到评测标准里，当前更多是基础体验</div><ul><li>是否回答了 query 背后的问题、换用户条件回答是否会变、是否替用户提了会后悔的事、用法和组合是否给到、关键供给信息是否核实</li></ul></td></tr></tbody>
+      <tbody><tr><td><b>1. 用户真实意图理解（agentic）</b></td><td class="op"><div class="lead">把用户当成有具体处境的人来回答，而不是把 query 当检索词执行</div><ul><li><b>是否回答了 query 背后用户真实的意图问题</b>：问"值不值"背后是"我这种情况该买什么"，敢答"别买，买 X"</li><li><b>依据用户条件 / 场景，回答会变</b>：发质、肤质、场合、预算、新手还是懂行，是推理依据不是复述的标签</li><li><b>是否替用户提到了不想会后悔的事</b>：真伪、禁忌、尺码表、没货</li><li><b>关键供给信息是否核实</b>：读完回答能说出它认为用户要解决什么、依据了哪些条件、替用户多想了什么</li></ul></td></tr><tr><td><b>2. 回答结构与呈现</b></td><td class="op"><div class="lead">回答的结构跟着理解走，不预设模板</div><ul><li><b>用户要的是一个结果时，也提供用法和组合方式</b>：如护肤流程要早晚各用什么，穿搭要怎么互搭，新手要先买什么</li><li><b>每个候选能回答"为什么是它"</b>：理由来自对用户的理解，不是参数复述</li><li><b>清单和搭配题交付前自检结果</b>：颜色互搭、尺码一致、总价在预算内，任一不满足就换单品</li></ul></td></tr><tr><td><b>3. 商品检索覆盖</b></td><td class="op"><div class="lead">回答结果覆盖了站内外来源（websearch 调用时机？）</div><ul><li>回答里体现依据：公认平替是谁、关键参数是什么、来源是什么</li><li>查不到就说没有公认结论，不编</li></ul></td></tr><tr><td><b>4. 商品候选质量</b></td><td class="op"><div class="lead">在遵循用户预算的前提下出高质量候选</div><ul><li><b>首推同时满足在预算内、有品牌或评分口碑</b>、和需求对得上，缺一就往后排</li><li>预算内确实没有好货时明说，并给站外或加预算的选项</li></ul></td></tr><tr><td><b>5. 商品检索深度</b></td><td class="op"><div class="lead">推荐前到商家页面层拿实际值</div><ul><li>价格、库存、免邮门槛、送达日期、尺码表</li><li>送达题给判断和条件，同店免邮题核到门槛金额</li><li>看图题先识别是否有类似的品牌款式，再查该款尺码表，用围度给结论</li><li>不可行需求给最接近的真实可买候选，标明差异，附链接</li></ul></td></tr><tr><td><b>6. 首 token 时延</b></td><td class="op"><div class="lead">首 token 5 秒内，或至少和 ChatGPT 持平</div></td></tr><tr><td><b>7. 评测跟上</b></td><td class="op"><div class="lead">回答里的增益项加入到评测标准里，当前更多是基础体验</div><ul><li>是否回答了 query 背后的问题、换用户条件回答是否会变、是否替用户提了会后悔的事、用法和组合是否给到、关键供给信息是否核实</li></ul></td></tr></tbody>
     </table></div>
   </div>
 </section>
