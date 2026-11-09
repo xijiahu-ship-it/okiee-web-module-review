@@ -142,6 +142,12 @@ table.opt .k{display:block;margin-top:4px;font-size:10.5px;font-weight:600;color
 .tab[data-mode=muse].on{color:var(--purple)}
 .kpi.u b{color:var(--purple)}
 .modeview[hidden]{display:none!important}
+
+.dsum{margin:0 0 10px!important;font-size:13.5px;color:var(--red-ink);background:var(--red-bg);border-radius:8px;padding:8px 12px}
+.dsum b{color:var(--red-ink)}
+.dcol.good{border-left:3px solid var(--blue)} .dcol.bad{border-left:3px solid var(--red)}
+.dh small{font-weight:500;color:var(--ink3);font-size:11.5px;margin-left:6px}
+.dh.bad{color:var(--red-ink)}
 /* workbench */
 .app{display:grid;grid-template-columns:250px minmax(0,1fr) 320px;gap:16px;align-items:start}
 @media (max-width:1100px){.app{grid-template-columns:230px minmax(0,1fr)} aside.notes{grid-column:1/-1;position:static;max-height:none}}
@@ -291,27 +297,12 @@ aside.notes h3:first-child{margin-top:0}
       <div class="ttft-sum" id="ttftsum"></div>
     </div>
     <h3 class="h3">两边的差异</h3>
+    <p class="dsum"><b>总结：</b>Migoo 赢在听话和交付，ChatGPT 赢在懂用户真正要什么后再组装回答。</p>
     <div class="diff">
-      <div class="dcol">
-        <div class="dh g">ChatGPT</div>
-        <ul>
-          <li><b>先理解意图再决定怎么回</b>：婚礼穿搭先给上身效果图再给单品<a class="qc" href="#q13">Q13</a>；美妆冰箱和蒸脸仪直接说都不是必需、钱该花在别处<a class="qc" href="#q5">Q5</a>；Airwrap 说"别买，买 Shark FlexStyle"<a class="qc" href="#q3">Q3</a>。</li>
-          <li><b>候选是用户认得的品牌</b>：Laifen、Shark、The Ordinary、COSRX，并说清为什么选它。</li>
-          <li><b>回答结构随题变</b>：预算表、5 天穿搭组合、四家比价表、"我的结论"段。</li>
-          <li><b>短板</b>：硬约束对得不如 Migoo 认真，超预算、未确认库存、只给品类不给商品<a class="qc" href="#q2">Q2</a><a class="qc" href="#q15">Q15</a><a class="qc" href="#q17">Q17</a>。</li>
-        </ul>
-      </div>
-      <div class="dcol">
-        <div class="dh m">Migoo</div>
-        <ul>
-          <li><b>按 query 字面执行</b>：搜到什么给什么；判断要么没给，要么给了但不准，指定型号没货就换一个型号交差<a class="qc" href="#q9">Q9</a>。</li>
-          <li><b>候选落在白牌低价款</b>：首推 1.09 美元精华、7 美元吹风机，知名品牌只在站外补充<a class="qc" href="#q6">Q6</a><a class="qc" href="#q1">Q1</a>。</li>
-          <li><b>17 题一个结构</b>："分组小标题 + 卡片 + 一段取舍 + 两个追问 chip"，只列参数不讲取舍。</li>
-          <li><b>优势要保留</b>：每题都有可直接购买的商品卡；预算、尺码、同店这类显性约束对得认真；清单题直接落到具体套装和价格<a class="qc" href="#q2">Q2</a><a class="qc" href="#q15">Q15</a><a class="qc" href="#q17">Q17</a>。</li>
-        </ul>
-      </div>
+      <div class="dcol good"><div class="dh m">Migoo 好在哪 <small>3 题赢</small></div><ul><li><b>对用户的硬约束很遵循：</b>预算、尺码、同店这类用户明说的条件逐条对上。吸尘器 4 款都在预算内并逐条对应 HEPA、40 分钟、电动刷，ChatGPT 3 款都不满足<a class="qc" href="#q2">Q2</a>；婚礼穿搭两条裙子都标了 S 码，ChatGPT 自述没确认库存<a class="qc" href="#q15">Q15</a>。</li></ul></div>
+      <div class="dcol bad"><div class="dh bad">Migoo 不好在哪 <small>13 题输，集中在三件事</small></div><ul><li><b>按字面执行，不理解意图：</b>ChatGPT 先想用户到底要什么再决定怎么回。婚礼穿搭先给上身效果图再给单品，胶囊衣橱给 5 天穿搭组合<a class="qc" href="#q13">Q13</a>；美妆冰箱和蒸脸仪直接说都不是必需、钱该花在别处<a class="qc" href="#q5">Q5</a>；Airwrap 说"别买，买 Shark FlexStyle"<a class="qc" href="#q3">Q3</a>。Migoo 搜到什么给什么，判断要么没给、要么给了但不准，指定型号没货就换一个型号交差<a class="qc" href="#q9">Q9</a>。</li><li><b>候选白牌低价，ChatGPT 给认得的品牌：</b>Migoo 首推 1.09 美元精华、7 美元吹风机、19 美元无 FDA 美容仪；ChatGPT 同题给 The Ordinary、Laifen、RENPHO，并说清为什么选它（无刷电机、415nm 蓝光）。典型：<a class="qc" href="#q1">Q1</a><a class="qc" href="#q4">Q4</a><a class="qc" href="#q6">Q6</a><a class="qc" href="#q10">Q10</a><a class="qc" href="#q14">Q14</a>。</li><li><b>回答一套模板：</b>17 题都是"分组小标题 + 卡片 + 一段取舍 + 两个追问"，只列参数不讲取舍，护肤题没有早晚流程<a class="qc" href="#q14">Q14</a>，清单题整套不互搭（亮粉上衣配黄鞋、尺码 XL/XXL/42 混搭）<a class="qc" href="#q13">Q13</a>；ChatGPT 结构随题变：预算表、比价表、"我的结论"段。</li></ul></div>
     </div>
-    <p class="dnote"><b>时延</b>：首 token 中位 Migoo 28.0 秒对 ChatGPT 8.7 秒，17 道文字题全部更慢；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"。</p>
+    <p class="dnote"><b>速度</b>：首 token 中位 Migoo 28 秒、ChatGPT 8.7 秒，17 道文字题全部更慢；ChatGPT 0.4 秒就显示 Searching the web，Migoo 10 秒后才出"搜索中"。</p>
   </div>
   <div class="sum opt">
     <h2>优化点（按模块）</h2>
@@ -374,28 +365,12 @@ aside.notes h3:first-child{margin-top:0}
       <div class="ttft-sum" id="ttftsum-mu"></div>
     </div>
     <h3 class="h3">两边的差异</h3>
+    <p class="dsum"><b>总结：</b>Migoo 同样赢在听话遵循约束，Muse 赢在依赖 browser use 实现的供给查询深度。</p>
     <div class="diff">
-      <div class="dcol">
-        <div class="dh m">Migoo</div>
-        <ul>
-          <li><b>赢在直接交付</b>：该给表格时给了表格<a class="qc" href="#muse-q4">Q4</a>，该给清单时不反问直接给 7 件<a class="qc" href="#muse-q13">Q13</a>，S 码标得明确<a class="qc" href="#muse-q15">Q15</a>；每题都有商品卡，首 token 中位 28 秒比 Muse 快。</li>
-          <li><b>输在不核实</b>：参数按商品页宣称值直接写，不去商家页面确认库存、免邮和送达；送达题只说"结账时看"<a class="qc" href="#muse-q11">Q11</a>，同店题给了英镑英国站<a class="qc" href="#muse-q16">Q16</a>。</li>
-          <li><b>输在候选</b>：目录首推 1.09 美元精华、7 美元吹风机这类白牌低价款<a class="qc" href="#muse-q6">Q6</a><a class="qc" href="#muse-q1">Q1</a>，Muse 同题给 Good Molecules、Laifen。</li>
-          <li><b>输在判断</b>：不说 Dyson 不值<a class="qc" href="#muse-q3">Q3</a>，不给 Chanel 的真实替代<a class="qc" href="#muse-q12">Q12</a>，不查尺码表<a class="qc" href="#muse-q19">Q19</a>。</li>
-        </ul>
-      </div>
-      <div class="dcol">
-        <div class="dh u">Muse（Meta）</div>
-        <ul>
-          <li><b>先开商家页面核实再回答</b>：库存、免邮门槛、送达日期、尺码表都真的去查了，并说明哪些店没核到。唯一核实全满足约束的吸尘器<a class="qc" href="#muse-q2">Q2</a>、唯一给出周五能否送达的判断<a class="qc" href="#muse-q11">Q11</a>、唯一同店购齐且免邮门槛核实<a class="qc" href="#muse-q16">Q16</a>、唯一查到尺码表<a class="qc" href="#muse-q19">Q19</a>。</li>
-          <li><b>候选品牌好、价格实</b>：Laifen、Shark、The Ordinary、L'Occitane，预算内不挑最便宜，常提醒"看实价不看标价"。</li>
-          <li><b>敢给判断和真实替代</b>：Dyson 不值<a class="qc" href="#muse-q3">Q3</a>；100 美元没有正品 Chanel，但给出 142 美元认证二手并点破假货<a class="qc" href="#muse-q12">Q12</a>；穿搭题末尾给出"穿在我身上看看"的试穿入口（按钮，本次未点开）<a class="qc" href="#muse-q16">Q16</a>。</li>
-          <li><b>短板</b>：慢，首 token 中位 40 秒、结论出现中位约 9 分钟；该给表格时没给<a class="qc" href="#muse-q4">Q4</a>、胶囊衣橱只反问<a class="qc" href="#muse-q13">Q13</a>；账号记忆带入（混合肌、Miami）<a class="qc" href="#muse-q7">Q7</a><a class="qc" href="#muse-q11">Q11</a>。</li>
-        </ul>
-      </div>
+      <div class="dcol good"><div class="dh m">Migoo 好在哪 <small>同样是约束很遵循</small></div><ul><li><b>要清单直接给：</b>秋季衣橱 Migoo 直接给 7 件，Muse 反问男女款和尺码没交付<a class="qc" href="#muse-q13">Q13</a>。</li><li><b>显性尺码对上：</b>婚礼穿搭 Migoo 两条裙子都标 S 码，Muse 没确认尺码<a class="qc" href="#muse-q15">Q15</a>。</li></ul></div>
+      <div class="dcol bad"><div class="dh bad">Migoo 不好在哪 <small>15 题输，集中在两件事</small></div><ul><li><b>供给查询深度不够：</b>建议尺码的题 Migoo 凭身高体重给 S，Muse 查到 Maje FR 36、Cinq à Sept US 2 的围度后给 S / US 2<a class="qc" href="#muse-q19">Q19</a>；送达题 Migoo 说"结账时看"，同店给了英镑英国站，Muse 每题打开商家页面核库存、免邮门槛、送达日期，并说明哪些店没核到：只留核实全满足的 BISSELL<a class="qc" href="#muse-q2">Q2</a>、查到 Fast Delivery 能到周五<a class="qc" href="#muse-q11">Q11</a>、核实 SHEIN 34.45 美元超免邮门槛<a class="qc" href="#muse-q16">Q16</a>；找 100 美元内正品 Chanel，Migoo 说没有，Muse 给出 142 美元认证二手并点破 49 美元假货<a class="qc" href="#muse-q12">Q12</a>。</li><li><b>候选白牌，Muse 给品牌：</b>Migoo 首推 1.09 美元精华、7 美元吹风机；Muse 同题给 Good Molecules、Laifen、Shark、L'Occitane，预算内不挑最便宜。典型：<a class="qc" href="#muse-q1">Q1</a><a class="qc" href="#muse-q3">Q3</a><a class="qc" href="#muse-q6">Q6</a><a class="qc" href="#muse-q10">Q10</a><a class="qc" href="#muse-q14">Q14</a>。</li></ul></div>
     </div>
-    <p class="dnote"><b>口径</b>：以 Migoo 为主体对 Muse 的 GSB 为 3:1:15。Migoo 领先第 4 题（Muse 没给表格）、第 13 题（Muse 只反问）、第 15 题（Muse 没确认 S 码），持平第 7 题。Muse 赢 Migoo 的题集中在候选品牌和"去商家页面核实后才敢说"的内容：库存、免邮门槛、送达日期、尺码表、不可行约束下的真实替代。Migoo vs ChatGPT 的结论见另一页。</p>
-    <p class="dnote"><b>时延</b>：首 token 中位 Migoo 28.0 秒、Muse 39.6 秒；Muse 先发一条"正在查"的进度消息再整段给结论，结论出现中位约 9 分钟，19 题里 4 题首 token 超过 400 秒。19 题分 3 个 side chat 并行发送，Muse 可能排队偏慢。这是 Migoo 对 Muse 最明确的优势。</p>
+    <p class="dnote"><b>速度</b>：两边都慢。Migoo 首 token 中位 28 秒，Muse 39.6 秒、结论中位要等 9 分钟；Migoo 只是相对 Muse 快，对照 ChatGPT 的 8.7 秒，Migoo 17 题全部更慢。Muse 的慢有一部分换来了核实结果。</p>
   </div>
   <div class="sum opt">
     <h2>从 Muse 身上能借鉴什么（按模块）</h2>
